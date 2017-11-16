@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Online Menu</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_quest_back">QuestBack</string>
+    <string name="title_activity_store_page">StorePage</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_home_page_and_flipper">HomePageAndFlipper</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_test2">test2</string>
+    <string name="fbt1">1.店面問題(申請重啟店面等)</string>
+    <string name="fbt2">2.帳號問題(忘記密碼等)</string>
+    <string name="fbt3">3.APP問題(錯誤回饋等)</string>
+    <string name="fbt4">4.其他(詐騙等)</string>
+    <string name="choose1">相機</string>
+    <string name="choose2">相簿</string>
+    <string name="title_activity_store_dish_detail">StoreDishDetail</string>
+    <string name="title_activity_home_page_store">HomePageStore</string>
+</resources>

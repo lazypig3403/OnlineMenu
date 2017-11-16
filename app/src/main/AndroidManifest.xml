@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.yao.onlinemenu">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Online Menu"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".CustomerInformation" />
+        <activity
+            android:name=".Login"
+            android:label="OnlineMenu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Register"
+            android:label="註冊" />
+        <activity
+            android:name=".Feedback"
+            android:label="聯絡我們"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomePageCustomer"
+            android:label="首頁" />
+        <activity
+            android:name=".Search"
+            android:label="搜尋" />
+        <activity
+            android:name=".MorePopularity"
+            android:label="人氣推薦" />
+        <activity
+            android:name=".MoreNew"
+            android:label="最新推薦" />
+        <activity
+            android:name=".MoreDiscount"
+            android:label="折扣推薦" />
+        <activity
+            android:name=".MoreNearby"
+            android:label="折扣推薦" />
+        <activity
+            android:name=".UserSetting"
+            android:label="設定" />
+        <activity
+            android:name=".SearchResult"
+            android:label="搜尋結果" />
+        <activity
+            android:name=".CustomerCart"
+            android:label="購物車" />
+        <activity
+            android:name=".Store_Home"
+            android:label="首頁" />
+        <activity
+            android:name=".KeeperInfo"
+            android:label="店主資訊" />
+        <activity android:name=".MenuList" />
+        <activity android:name=".SearchResult_Detail" />
+        <activity
+            android:name=".StoreAdd"
+            android:label="新增店面" >
+        </activity>
+        <activity android:name=".StoreComment_detail" />
+        <activity android:name=".StoreCommentUpdate" />
+        <activity android:name=".StoreInfoUpdate" />
+        <activity
+            android:name=".StoreSelect"
+            android:label="店面管理" />
+        <activity android:name=".StoreTab" />
+        <activity android:name=".StoreTabComm" />
+        <activity android:name=".StoreTabInfo" />
+        <activity android:name=".StoreTabMenu" />
+        <activity android:name=".UpdateCell" />
+        <activity android:name=".UpdateMail" />
+        <activity android:name=".UpdatePW" />
+        <activity android:name=".DishAdd" />
+        <activity android:name=".DishDetail" />
+        <activity android:name=".StoreOrderManagement" />
+        <activity android:name=".StoreOrderDetail"></activity>
+    </application>
+
+</manifest>

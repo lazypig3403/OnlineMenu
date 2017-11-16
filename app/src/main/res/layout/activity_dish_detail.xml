@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yao.onlinemenu.DishDetail"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <ImageView
+        android:id="@+id/select_dishImg"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="65dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        android:stretchColumns="1"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/select_dishImg"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin"
+            android:background="@color/colorWhite">
+
+            <TextView
+                android:id="@+id/tv_dish_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@color/colorGrey"
+                android:padding="@dimen/padding"
+                android:text="餐點名稱"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size3"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/select_dishName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@color/colorWhite"
+                android:padding="@dimen/padding"
+                android:text=""
+                android:textSize="@dimen/txt_size3" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin"
+            android:background="@color/colorWhite">
+
+            <TextView
+                android:id="@+id/tv_dish_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@color/colorGrey"
+                android:padding="@dimen/padding"
+                android:text="價格"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size3"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/select_dishPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@color/colorWhite"
+                android:padding="@dimen/padding"
+                android:text=""
+                android:textSize="@dimen/txt_size3" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin"
+            android:background="@color/colorWhite">
+
+            <TextView
+                android:id="@+id/tv_dish_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@color/colorGrey"
+                android:padding="@dimen/padding"
+                android:text="餐點類型"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size3"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/select_dishType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@color/colorWhite"
+                android:padding="@dimen/padding"
+                android:text=""
+                android:textSize="@dimen/txt_size3" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin"
+            android:background="@color/colorWhite">
+
+            <TextView
+                android:id="@+id/tv_dish_ingredient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:background="@color/colorGrey"
+                android:padding="@dimen/padding"
+                android:text="食材"
+                android:textAlignment="center"
+                android:textSize="@dimen/txt_size3"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/select_dishIngredient"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/margin"
+                android:background="@color/colorWhite"
+                android:padding="@dimen/padding"
+                android:text=""
+                android:textSize="@dimen/txt_size3" />
+
+        </TableRow>
+
+        <!--  評價(評論)??  -->
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/bt_goOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="編輯"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+
+</android.support.constraint.ConstraintLayout>

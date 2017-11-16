@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sample_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.yao.onlinemenu.Store_Home">
+
+    <TextView
+        android:id="@+id/KeeperM"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="店主資訊"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#fe979595"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/StoreM"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="店面管理"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#fe979595"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/OrderM"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="訂單管理"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#fe979595"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/Notice"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="訊息管理"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#fe979595"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/Statistics"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="統計資料"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#fe979595"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="5dp" />
+</LinearLayout>

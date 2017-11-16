@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yao.onlinemenu.DishAdd">
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/edit_dishImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <TableLayout
+                    android:id="@+id/tableDish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:shrinkColumns="1">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/margin"
+                        android:background="@color/colorWhite">
+
+                        <TextView
+                            android:id="@+id/textView01"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin"
+                            android:padding="@dimen/padding"
+                            android:text="餐點名稱"
+                            android:textSize="@dimen/txt_size4"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edit_dishName"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/margin"
+                        android:background="@color/colorWhite">
+
+                        <TextView
+                            android:id="@+id/textView02"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin"
+
+                            android:padding="@dimen/padding"
+                            android:text="價格"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/txt_size4"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edit_dishPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="number" />
+                    </TableRow>
+                </TableLayout>
+
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/tableIngre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shrinkColumns="1">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        android:id="@+id/textViewDishType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin"
+                        android:padding="@dimen/padding"
+                        android:text="餐點類型"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/txt_size4"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/edit_dishType"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin"
+                        android:padding="@dimen/padding"
+                        android:hint="選擇下列類型"
+                        android:textSize="@dimen/txt_size4" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin"
+                    android:background="@color/colorWhite">
+
+                    <Button
+                        android:id="@+id/bt_DishType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin"
+                        android:text="類型" />
+
+                    <!--<Button-->
+                        <!--android:id="@+id/buttom其他"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="@dimen/margin"-->
+                        <!--android:text="其他" />-->
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        android:id="@+id/textViewIngredients"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin"
+                        android:padding="@dimen/padding"
+                        android:text="食材"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/txt_size4"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/edit_dishIngredients"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin"
+                        android:padding="@dimen/padding"
+                        android:hint="選擇下列食材"
+                        android:textSize="@dimen/txt_size4" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin"
+                    android:background="@color/colorWhite">
+
+                    <Button
+                        android:id="@+id/bt_meat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin"
+                        android:text="肉類" />
+
+                    <Button
+                        android:id="@+id/bt_seafood"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin"
+                        android:text="海鮮" />
+
+                    <Button
+                        android:id="@+id/bt_seasoning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin"
+                        android:text="辛香料" />
+
+                    <Button
+                        android:id="@+id/bt_else"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin"
+                        android:text="其他" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="0dp"
+        android:id="@+id/linearLayout2"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/sv"
+        app:layout_constraintVertical_bias="1.0">
+
+        <Button
+            android:id="@+id/dishAdd_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="確認" />
+
+        <Button
+            android:id="@+id/dishAdd_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
+
