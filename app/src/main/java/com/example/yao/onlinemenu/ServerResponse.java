@@ -18,17 +18,22 @@ public class ServerResponse implements Serializable {
 
     @SerializedName("success")
     @Expose
-    private String success;
+    private Integer success;
     @SerializedName("message")
     @Expose
     private String message;
 
+    //
+    @SerializedName("result")
+    @Expose
+    private List<Result_customerinfo> result = null;
+    //
 
-    public String getSuccess() {
+    public Integer getSuccess() {
         return success;
     }
 
-    public void setSuccess(String success) {
+    public void setSuccess(Integer success) {
         this.success = success;
     }
 

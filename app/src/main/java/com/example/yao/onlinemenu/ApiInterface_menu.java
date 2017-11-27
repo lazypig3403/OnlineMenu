@@ -1,7 +1,5 @@
 package com.example.yao.onlinemenu;
 
-import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -20,8 +18,16 @@ public interface ApiInterface_menu {
     //搭配@Field使用
     //一定要加，不然怎麼死的都不曉得
     @FormUrlEncoded
-    @POST("menu_select.php")
+    @POST("menu.php")
     Call<ServerResponse_menu> selectMenu(
             @Field("status") String Status,
             @Field("storeID") String StoreID);
+
+    //新增菜單
+    @FormUrlEncoded
+    @POST("menu.php")
+    Call<ServerResponse_menu> insertMenu(
+            @Field("status") String status,
+            @Field("storeID") String StoreID,
+            @Field("newMenuName") String nMenu);
 }

@@ -1,11 +1,8 @@
 package com.example.yao.onlinemenu;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -32,7 +29,6 @@ public class Store_Home extends AppCompatActivity{
         KeeperM = (TextView) findViewById(R.id.KeeperM);
         StoreM = (TextView) findViewById(R.id.StoreM);
         OrderM = (TextView) findViewById(R.id.OrderM);
-        Notice = (TextView) findViewById(R.id.Notice);
         Statistics = (TextView) findViewById(R.id.Statistics);
     }
     private void processControllers() {
@@ -60,12 +56,6 @@ public class Store_Home extends AppCompatActivity{
                             startActivity(intent);
 //                            HomePageStore.this.finish();
                         }
-                        if (id == R.id.Notice) {
-//                            Intent intent = new Intent();
-//                            intent.setClass(HomePageStore.this, StoreKeeperInfo.class);
-//                            startActivity(intent);
-//                            HomePageStore.this.finish();
-                        }
                         if (id == R.id.Statistics) {
 //                            Intent intent = new Intent();
 //                            intent.setClass(HomePageStore.this, StoreKeeperInfo.class);
@@ -77,38 +67,6 @@ public class Store_Home extends AppCompatActivity{
         KeeperM.setOnClickListener(HomeListemer);
         StoreM.setOnClickListener(HomeListemer);
         OrderM.setOnClickListener(HomeListemer);
-        Notice.setOnClickListener(HomeListemer);
         Statistics.setOnClickListener(HomeListemer);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
-
-        if (keyCode == KeyEvent.KEYCODE_BACK) { // 攔截返回鍵
-            new AlertDialog.Builder(Store_Home.this)
-                    .setTitle("確認視窗")
-                    .setMessage("確定要結束應用程式嗎?")
-                    .setPositiveButton("確定",
-                            new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-                                    finish();
-                                }
-                            })
-                    .setNegativeButton("取消",
-                            new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-                                    // TODO Auto-generated method stub
-
-                                }
-                            }).show();
-        }
-        return true;
     }
 }

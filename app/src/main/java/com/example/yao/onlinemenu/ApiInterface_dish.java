@@ -22,4 +22,14 @@ public interface ApiInterface_dish {
     Call<ServerResponse_dish> selectDish(
             @Field("status") String Status,
             @Field("menuNo") String MenuNo);
+
+    @FormUrlEncoded
+    @POST("dish_add.php")
+    Call<ServerResponse_dish> addDish(
+            @Field("dstatus") String DStatus,
+            @Field("dmenuNo") String DMenuNo,
+            @Field("dname") String DName,
+            @Field("dprice") String DPrice,
+            @Field("dtype") String DType,
+            @Field("dingredients") String dIngredients);
 }

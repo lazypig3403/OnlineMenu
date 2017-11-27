@@ -1,6 +1,5 @@
 package com.example.yao.onlinemenu;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -88,10 +87,7 @@ public class StoreTab extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent();
-                intent.setClass(StoreTab.this, StoreSelect.class);
-                startActivity(intent);
-                StoreTab.this.finish();
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

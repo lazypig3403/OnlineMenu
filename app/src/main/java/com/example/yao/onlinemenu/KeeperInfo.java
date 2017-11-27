@@ -17,7 +17,7 @@ public class KeeperInfo extends AppCompatActivity {
     private ApiInterface_keeper apiK;
     private TextView upPwd, upCell, upMail;
 
-    private String uID = "demo123";
+    private String oID = "";
     private String status = "selectkeeper";
 
     @Override
@@ -26,11 +26,16 @@ public class KeeperInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_keeper_info);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //取得userID
+        GlobalVariable user = (GlobalVariable) getApplicationContext();
+        oID = user.getOwnerID();
+
         ClickUpdate();  //變更資訊切換
 
         apiK = ApiClient.getClient().create(ApiInterface_keeper.class);
 
-        Call<ServerResponse_keeperinfo> call = apiK.selectKeeper(uID,status);
+        Call<ServerResponse_keeperinfo> call = apiK.selectKeeper(oID,status);
         call.enqueue(new Callback<ServerResponse_keeperinfo>()
         {
             @Override
@@ -110,10 +115,7 @@ public class KeeperInfo extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent();
-                intent.setClass(KeeperInfo.this, Store_Home.class);
-                startActivity(intent);
-                KeeperInfo.this.finish();
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

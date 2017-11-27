@@ -15,6 +15,10 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DishAdd extends AppCompatActivity {
     private Button bt;
     private EditText et;
@@ -23,10 +27,13 @@ public class DishAdd extends AppCompatActivity {
     private String[] itemsDT,itemsDmeat,itemsDseafood,itemsDseasoning,itemsDelse;
     private int selectionDT;
     private boolean[] selectionDmeat,selectionDseafood,selectionDseasoning,selectionDelse;
+    private ApiInterface_dish Api_da;
 
 
     //連線資料
+    String dStatus="adddish",dMenuNo;
     String dName="",dPrice="",dType="",dIngredients;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +41,19 @@ public class DishAdd extends AppCompatActivity {
         setContentView(R.layout.activity_dish_add);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        // 接收
+        Bundle extras = getIntent().getExtras();
+        final String menuName_receive_da = extras.getString("Menu_Name_da");
+        final String menuNo_receive_da = extras.getString("Menu_No_da");
+        tv = (TextView) findViewById(R.id.tv_menuName);
+        tv.setText(menuName_receive_da);
+        dMenuNo = menuNo_receive_da;
+
         item();
         process();
+
+
     }
 
     void item(){
@@ -80,7 +98,7 @@ public class DishAdd extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                 selectionDT = which;
+                                selectionDT = which;
                             }
                         });
                 choose.setPositiveButton("確定", new DialogInterface.OnClickListener() {
@@ -232,6 +250,29 @@ public class DishAdd extends AppCompatActivity {
                                             new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
+
+                                                    Api_da = ApiClient.getClient().create(ApiInterface_dish.class);
+
+                                                    Call<ServerResponse_dish> call = Api_da.addDish(dStatus,dMenuNo,dName,dPrice,dType,dIngredients);
+
+                                                    call.enqueue(new Callback<ServerResponse_dish>() {
+                                                        @Override
+                                                        public void onResponse(Call<ServerResponse_dish> call, Response<ServerResponse_dish> SRd)
+                                                        {
+                                                            if (SRd.body().getSuccess().equals("1"))
+                                                            {
+                                                                showToast_posi();
+                                                            }
+                                                            else {
+                                                                showToast_fail();
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onFailure(Call<ServerResponse_dish> call, Throwable t)
+                                                        {call.cancel();}
+                                                    });
+
                                                     Intent intent = new Intent();
                                                     intent.setClass(DishAdd.this, StoreSelect.class);
                                                     startActivity(intent);
@@ -291,7 +332,7 @@ public class DishAdd extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-//    @Override
+    //    @Override
 //    public boolean onKeyDown(int keyCode, KeyEvent event) {
 //        // TODO Auto-generated method stub
 //
@@ -302,4 +343,13 @@ public class DishAdd extends AppCompatActivity {
 //        }
 //        return true;
 //    }
+    public void showToast_posi(){
+        Toast.makeText(this,"菜色資料已送出",Toast.LENGTH_LONG).show();
+    }
+    public void showToast_fail(){
+        Toast.makeText(this,"傳送失敗", Toast.LENGTH_LONG).show();
+    }
+    public void showToast_nega(){
+        Toast.makeText(this,"取消送出",Toast.LENGTH_LONG).show();
+    }
 }

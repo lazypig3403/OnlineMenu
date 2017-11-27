@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "852335481967",
+    "firebase_url": "https://onlinemenu-70deb.firebaseio.com",
+    "project_id": "onlinemenu-70deb",
+    "storage_bucket": "onlinemenu-70deb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852335481967:android:8cbf88352e8a1916",
+        "android_client_info": {
+          "package_name": "com.example.yao.onlinemenu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852335481967-eq59kdvdndqu6jntvpnk7or8h95q5666.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yao.onlinemenu",
+            "certificate_hash": "fb6850411cd2430d9988d522230c17c6ad40f896"
+          }
+        },
+        {
+          "client_id": "852335481967-trvbcr8krf46bfr10p23cpard65tn9nd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGAC0eeWuinV6QY94MSmunIh0IjnrGcDI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852335481967-trvbcr8krf46bfr10p23cpard65tn9nd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

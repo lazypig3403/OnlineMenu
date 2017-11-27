@@ -1,8 +1,6 @@
 package com.example.yao.onlinemenu;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,16 +14,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomePageCustomer extends AppCompatActivity {
 
@@ -34,16 +22,13 @@ public class HomePageCustomer extends AppCompatActivity {
     private int[] mImgIds ,mImgIds2 ,mImgIds3 ,mImgIds4 , mImgIds5;
     private String[]   mText, mText2, mText3, mText4 ,  mText5;
     private LayoutInflater mInflater ;
-    private ApiInterface_menu apiinterface_menu;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        apiinterface_menu = ApiClient.getClient().create(ApiInterface_menu.class);
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_home_page_customer);
-
 
         mInflater = LayoutInflater.from(this);
         initData();
@@ -110,6 +95,9 @@ public class HomePageCustomer extends AppCompatActivity {
 
 
     }
+
+
+
 
         //Toolbar使用
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -270,7 +258,6 @@ public class HomePageCustomer extends AppCompatActivity {
             txt.setText(mText4[s]);
             mGallery.addView(view);
         }
-
 
     }
 

@@ -19,7 +19,7 @@ public class UpdateCell extends AppCompatActivity {
     private Button updateCell;
     private ApiInterface_keeper ApiI;
     private String nCell;
-    private String uID="demo123";
+    private String oID="";
     private String status = "updatecell";
 
     @Override
@@ -28,6 +28,10 @@ public class UpdateCell extends AppCompatActivity {
         setContentView(R.layout.activity_update_cell);
         setTitle("修改電話");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //取得userID
+        GlobalVariable user = (GlobalVariable)getApplicationContext();
+        oID = user.getOwnerID();
 
         newCell = (EditText) findViewById(R.id.newCell);
         updateCell = (Button) findViewById(R.id.cell_update);
@@ -43,7 +47,7 @@ public class UpdateCell extends AppCompatActivity {
 
                         ApiI = ApiClient.getClient().create(ApiInterface_keeper.class);
 
-                        Call<ServerResponse_keeperinfo> call = ApiI.updateCell(uID,nCell,status);
+                        Call<ServerResponse_keeperinfo> call = ApiI.updateCell(oID,nCell,status);
 
                         call.enqueue(new Callback<ServerResponse_keeperinfo>() {
                             @Override

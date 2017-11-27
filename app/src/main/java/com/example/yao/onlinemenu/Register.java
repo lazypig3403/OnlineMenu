@@ -64,15 +64,15 @@ public class Register extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                String un = editText.getText().toString();
-                String pw = editText1.getText().toString();
-                String pwc = editText2.getText().toString();
-                String rn = editText3.getText().toString();
-                String cpn = editText5.getText().toString();
-                String ema = editText6.getText().toString();
+                final String un = editText.getText().toString();
+                final String pw = editText1.getText().toString();
+                final String pwc = editText2.getText().toString();
+                final String rn = editText3.getText().toString();
+                final String cpn = editText5.getText().toString();
+                final String ema = editText6.getText().toString();
                 if(toggleButton1.isChecked()==false && toggleButton2.isChecked()==false)
                 {
-                Toast.makeText(Register.this,"請選擇身份(可同時註冊)" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this,"請選擇身份(可同時註冊)" , Toast.LENGTH_SHORT).show();
                 }
                 else if(!pw.equals(pwc))
                 {
@@ -88,21 +88,33 @@ public class Register extends AppCompatActivity {
                     else if(toggleButton1.isChecked()==true){id="1";} //消費者身分
                     else{id="2";} //店家身分
 
+
+
+
+
                     Call<ServerResponse> call = apiinterface.register(un,pw,rn, ema, cpn, id);
                     call.enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response)
                         {
-                            if(response.body().getSuccess().equals("1"))
+                            if(response.body().getSuccess()==1)
                             {
                                 Toast.makeText(getApplicationContext(), "註冊成功", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent();
-                                intent.setClass(Register.this  , Login.class);
+
+                                //傳送資料到PhoneVerify
+                                Bundle register_send = new Bundle();
+                                register_send.putString("un", un);
+                                register_send.putString("cpn", cpn);
+                                register_send.putString("id", id);
+                                intent.putExtras(register_send);
+
+                                intent.setClass(Register.this  , PhoneVerify.class);
                                 startActivity(intent);
                             }
                             else
                             {
-                                Toast.makeText(getApplicationContext(), "失敗", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "註冊失敗，此帳號名已使用", Toast.LENGTH_LONG).show();
                             }
                         }
 

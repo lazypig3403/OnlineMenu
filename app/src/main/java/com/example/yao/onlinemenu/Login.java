@@ -1,16 +1,17 @@
 package com.example.yao.onlinemenu;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -107,11 +108,12 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response)
                         {
-                            if(response.body().getSuccess().equals("1"))
+                            if(response.body().getSuccess()==1)
                             {
                                 Toast.makeText(getApplicationContext(), "登入成功", Toast.LENGTH_LONG).show();
                               //  login = "1";
                                 IDLogin();
+//                                InfoSelect();
                             }
                             else
                             {
@@ -128,24 +130,53 @@ public class Login extends AppCompatActivity {
                         public void IDLogin()
                         {
                             if(id.equals("0")) {
+                                //儲存userID
+                                GlobalVariable user = (GlobalVariable) getApplicationContext();
+                                user.setCustomerID(un);
+
                                 Intent customer = new Intent();
                                 customer.setClass(Login.this, HomePageCustomer.class);
                                 startActivity(customer);
+                                Login.this.finish();
                             }
                             else
                             {
+                                //儲存userID
+                                GlobalVariable user = (GlobalVariable) getApplicationContext();
+                                user.setOwnerID(un);
+
                                 Intent store = new Intent();
                                 store.setClass(Login.this, Store_Home.class);
-
-//                                Bundle un_send = new Bundle();
-//                                un_send.putString("un_login2storehome", un);
-//                                store.putExtras(un_send);
-
                                 startActivity(store);
                                 Login.this.finish();
                             }
-
                         }
+
+//                        public void InfoSelect()
+//                        {
+//                            Call<ServerResponse> call = apiinterface.infoselect(un);
+//                            call.enqueue(new Callback<ServerResponse>() {
+//                                @Override
+//                                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response)
+//                                {
+//                                    if(response.body().getSuccess()==1)
+//                                    {
+//
+//                                    }
+//                                    else
+//                                    {
+//
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Call<ServerResponse> call, Throwable t)
+//                                {
+//                                    call.cancel();
+//                                }
+//                            });
+//                        }
+
                     });
 
                 }
@@ -175,6 +206,35 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
 
+        if (keyCode == KeyEvent.KEYCODE_BACK) { // 攔截返回鍵
+            new AlertDialog.Builder(Login.this)
+                    .setTitle("確認視窗")
+                    .setMessage("確定要結束應用程式嗎?")
+                    .setPositiveButton("確定",
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    finish();
+                                }
+                            })
+                    .setNegativeButton("取消",
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    // TODO Auto-generated method stub
+
+                                }
+                            }).show();
+        }
+        return true;
+    }
 
 }

@@ -35,7 +35,7 @@ public class SearchResult extends AppCompatActivity {
     private ArrayList<HashMap<String, String>> SearchData = new ArrayList<>();
     private ArrayList<String> arrNo = new ArrayList<>(), arrCtr = new ArrayList<>();
     private SharedPreferences ShaPre;
-//    private Boolean prevTimerNotRunning
+    //    private Boolean prevTimerNotRunning
     GlobalVariable gv ;
 
 
@@ -140,71 +140,71 @@ public class SearchResult extends AppCompatActivity {
     public void countdownTimer() {
         gv.setprevTimerNotRunning(false);
 
-            CountDownTimer timer = new CountDownTimer(60000, 1000) {
-                //每跳1000ms=1s↑進入一次onTick
-                public void onTick(long millisUntilFinished) {
+        CountDownTimer timer = new CountDownTimer(180000, 1000) {
+            //每跳1000ms=1s↑進入一次onTick
+            public void onTick(long millisUntilFinished) {
 //                DoNothing
-                }
+            }
 
-                public void onFinish() {
+            public void onFinish() {
 
 //                    SharedPreferences ShaPre = getSharedPreferences("CTR", MODE_PRIVATE);
-                    Map<String,?> ctrdata = ShaPre.getAll();
+                Map<String,?> ctrdata = ShaPre.getAll();
 
-                    //MapToStringArray
+                //MapToStringArray
 //                String NOKey = "";
 //                String CtrValue = "";
-                    for(Map.Entry entry:ctrdata.entrySet())
-                    {
+                for(Map.Entry entry:ctrdata.entrySet())
+                {
 //                  字串方式
 //                  NOKey = NOKey +entry.getKey().toString() + ".";
 //                  Toast.makeText(SearchResult.this, NOKey, Toast.LENGTH_SHORT).show();
 //                  CtrValue = CtrValue + entry.getValue().toString() + "." ;
 //                  array方式
-                        arrNo.add(entry.getKey().toString());
-                        arrCtr.add(entry.getValue().toString());
-                    }
-
-
-                    Call<ServerResponse> call = apiS.CTR(arrNo,arrCtr);
-                    call.enqueue(new Callback<ServerResponse>() {
-                        @Override
-                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                            if(response.body().getSuccess().equals("1"))
-                            {
-//                                Toast.makeText(SearchResult.this, "!success", Toast.LENGTH_SHORT).show();
-                                gv.setprevTimerNotRunning(true);
-                                ShaPre.edit().clear().apply();
-                                arrNo.clear();
-                                arrCtr.clear();
-                                Log.i("ctr","CTR update success");
-                                if(gv.getprevTimerNotRunning()) {
-                                    countdownTimer();
-                                }
-
-                            }
-                            else
-                            {
-//                                Toast.makeText(SearchResult.this, "Not 1", Toast.LENGTH_SHORT).show();
-                                    countdownTimer();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            countdownTimer();
-                            call.cancel();
-//                        Toast.makeText(SearchResult.this, "fail", Toast.LENGTH_SHORT).show();
-                            Log.e("ctr","CTR update error");
-
-
-                        }
-
-                    });
-
+                    arrNo.add(entry.getKey().toString());
+                    arrCtr.add(entry.getValue().toString());
                 }
 
-            }.start();
+
+                Call<ServerResponse> call = apiS.CTR(arrNo,arrCtr);
+                call.enqueue(new Callback<ServerResponse>() {
+                    @Override
+                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                        if(response.body().getSuccess() == 1)
+                        {
+//                                Toast.makeText(SearchResult.this, "!success", Toast.LENGTH_SHORT).show();
+                            gv.setprevTimerNotRunning(true);
+                            ShaPre.edit().clear().apply();
+                            arrNo.clear();
+                            arrCtr.clear();
+                            Log.i("ctr","CTR update success");
+                            if(gv.getprevTimerNotRunning()) {
+                                countdownTimer();
+                            }
+
+                        }
+                        else
+                        {
+//                                Toast.makeText(SearchResult.this, "Not 1", Toast.LENGTH_SHORT).show();
+                            countdownTimer();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+                        countdownTimer();
+                        call.cancel();
+//                        Toast.makeText(SearchResult.this, "fail", Toast.LENGTH_SHORT).show();
+                        Log.e("ctr","CTR update error");
+
+
+                    }
+
+                });
+
+            }
+
+        }.start();
 
     }
 
