@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,11 +29,15 @@ public class SearchResult extends AppCompatActivity {
 
     private RecyclerView searchlist;
     private ApiInterface_search apiS;
-    String[] arrName, arrPrice, arrIngredient, arrType, arrRating, arrShopName, arrNO;
-    HashMap<String,Integer> hmapCTR = new HashMap();
-    int[] arrImg;
+    private String[] arrName, arrPrice, arrIngredient, arrType, arrRating, arrShopName, arrNO;
+    private HashMap<String,Integer> hmapCTR = new HashMap();
+    private int[] arrImg;
     private ArrayList<HashMap<String, String>> SearchData = new ArrayList<>();
-    SharedPreferences ShaPre;
+    private ArrayList<String> arrNo = new ArrayList<>(), arrCtr = new ArrayList<>();
+    private SharedPreferences ShaPre;
+//    private Boolean prevTimerNotRunning
+    GlobalVariable gv ;
+
 
 
     @Override
@@ -42,7 +47,8 @@ public class SearchResult extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         apiS = ApiClient.getClient().create(ApiInterface_search.class);
         ShaPre = getSharedPreferences("CTR", MODE_PRIVATE);
-//      點擊計算之3分鐘倒數計時器
+        gv = (GlobalVariable)getApplicationContext();
+//      點擊計算之2分鐘倒數計時器
         countdownTimer();
 
 
@@ -81,7 +87,7 @@ public class SearchResult extends AppCompatActivity {
                         arrType[i] = SingleRecord.getDType();
                         arrIngredient[i] = SingleRecord.getDIngredient();
                         hmapCTR.put(SingleRecord.getDNO(),SingleRecord.getCTR());
-                        ShaPre.edit().putInt(SingleRecord.getDNO(),SingleRecord.getCTR()).apply();
+//                        ShaPre.edit().putInt(SingleRecord.getDNO(),SingleRecord.getCTR()).apply();
                     }
 
 
@@ -132,57 +138,65 @@ public class SearchResult extends AppCompatActivity {
 
 
     public void countdownTimer() {
-        CountDownTimer timer = new CountDownTimer(10000, 1000) {
-                                            //每跳1000ms=1s↑進入一次onTick
-            public void onTick(long millisUntilFinished) {
+        gv.setprevTimerNotRunning(false);
+
+            CountDownTimer timer = new CountDownTimer(60000, 1000) {
+                //每跳1000ms=1s↑進入一次onTick
+                public void onTick(long millisUntilFinished) {
 //                DoNothing
-            }
-
-            public void onFinish() {
-                final SharedPreferences ShaPre = getSharedPreferences("CTR", MODE_PRIVATE);
-                Map<String,?> ctrdata = ShaPre.getAll();
-
-                //MapToStringArray
-                Boolean CtrDataIsDiff = Boolean.FALSE;
-                String NOKey = "";
-                String CtrValue = "";
-                for(Map.Entry entry:ctrdata.entrySet())
-                {
-                    NOKey = NOKey +entry.getKey().toString() + ".";
-//                    Toast.makeText(SearchResult.this, NOKey, Toast.LENGTH_SHORT).show();
-                    CtrValue = CtrValue + entry.getValue().toString() + "." ;
-
-//                    int temp = hmapCTR.get(entry.getKey().toString());
-                    if( !( hmapCTR.get(entry.getKey().toString()) == Integer.parseInt( entry.getValue().toString() )) )
-                    {
-                        CtrDataIsDiff = Boolean.TRUE;
-                    }
-
                 }
 
-                if(CtrDataIsDiff)
-                {
-                    Call<ServerResponse> call = apiS.CTR(NOKey,CtrValue);
+                public void onFinish() {
+
+//                    SharedPreferences ShaPre = getSharedPreferences("CTR", MODE_PRIVATE);
+                    Map<String,?> ctrdata = ShaPre.getAll();
+
+                    //MapToStringArray
+//                String NOKey = "";
+//                String CtrValue = "";
+                    for(Map.Entry entry:ctrdata.entrySet())
+                    {
+//                  字串方式
+//                  NOKey = NOKey +entry.getKey().toString() + ".";
+//                  Toast.makeText(SearchResult.this, NOKey, Toast.LENGTH_SHORT).show();
+//                  CtrValue = CtrValue + entry.getValue().toString() + "." ;
+//                  array方式
+                        arrNo.add(entry.getKey().toString());
+                        arrCtr.add(entry.getValue().toString());
+                    }
+
+
+                    Call<ServerResponse> call = apiS.CTR(arrNo,arrCtr);
                     call.enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             if(response.body().getSuccess().equals("1"))
                             {
-//                                Toast.makeText(SearchResult.this, "success", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(SearchResult.this, "!success", Toast.LENGTH_SHORT).show();
+                                gv.setprevTimerNotRunning(true);
                                 ShaPre.edit().clear().apply();
-                                Log.i("info","CTR update error");
+                                arrNo.clear();
+                                arrCtr.clear();
+                                Log.i("ctr","CTR update success");
+                                if(gv.getprevTimerNotRunning()) {
+                                    countdownTimer();
+                                }
+
                             }
                             else
                             {
 //                                Toast.makeText(SearchResult.this, "Not 1", Toast.LENGTH_SHORT).show();
+                                    countdownTimer();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ServerResponse> call, Throwable t) {
+                            countdownTimer();
                             call.cancel();
 //                        Toast.makeText(SearchResult.this, "fail", Toast.LENGTH_SHORT).show();
-                            Log.e("error","CTR update error");
+                            Log.e("ctr","CTR update error");
+
 
                         }
 
@@ -190,9 +204,8 @@ public class SearchResult extends AppCompatActivity {
 
                 }
 
-                countdownTimer();
-            }
-        }.start();
+            }.start();
+
     }
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {

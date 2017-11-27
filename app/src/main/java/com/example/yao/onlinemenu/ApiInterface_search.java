@@ -1,5 +1,7 @@
 package com.example.yao.onlinemenu;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -21,6 +23,6 @@ public interface ApiInterface_search {
     @FormUrlEncoded
     @POST("CTR.php")
     Call<ServerResponse> CTR(
-            @Field("no") String NO,
-            @Field("ctr") String CTR);
+            @Field("no[]") ArrayList<String> NO,
+            @Field("ctr[]") ArrayList<String> CTR);
 }
