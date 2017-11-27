@@ -19,7 +19,7 @@ public class UpdatePW extends AppCompatActivity {
     private Button updatePW;
     private ApiInterface_keeper ApiI;
     private String op,np,cp;
-    private String uID="demo123";
+    private String oID="";
     private String status = "updatepw";
 
     @Override
@@ -28,6 +28,10 @@ public class UpdatePW extends AppCompatActivity {
         setContentView(R.layout.activity_update_pw);
         setTitle("修改密碼");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //取得userID
+        GlobalVariable user = (GlobalVariable)getApplicationContext();
+        oID = user.getOwnerID();
 
         oldP = (EditText) findViewById(R.id.oldPwd);
         newP = (EditText) findViewById(R.id.newPwd);
@@ -51,7 +55,7 @@ public class UpdatePW extends AppCompatActivity {
 
                         ApiI = ApiClient.getClient().create(ApiInterface_keeper.class);
 
-                        Call<ServerResponse_keeperinfo> call = ApiI.updatePW(uID,op,np,status);
+                        Call<ServerResponse_keeperinfo> call = ApiI.updatePW(oID,op,np,status);
 
                         call.enqueue(new Callback<ServerResponse_keeperinfo>() {
                             @Override

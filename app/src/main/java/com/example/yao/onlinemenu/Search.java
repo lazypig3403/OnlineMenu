@@ -279,11 +279,6 @@ public class Search extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
         button = (Button)findViewById(R.id.button搜尋);
         button.setOnClickListener(new Button.OnClickListener(){
             @Override
@@ -304,8 +299,6 @@ public class Search extends AppCompatActivity {
                 bundle.putString("dollar2" , searchdollar_2) ;
                 //將Bundle物件傳給intent
                 intent.putExtras(bundle);
-
-
                 //切換Activity
                 startActivity(intent);
             }

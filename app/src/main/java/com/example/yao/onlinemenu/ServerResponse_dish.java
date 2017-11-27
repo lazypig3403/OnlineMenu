@@ -9,7 +9,7 @@ public class ServerResponse_dish {
 
     @SerializedName("success")
     @Expose
-    private Integer success;
+    private String success;
     @SerializedName("message")
     @Expose
     private String message;
@@ -17,11 +17,11 @@ public class ServerResponse_dish {
     @Expose
     private List<Result_dish> result = null;
 
-    public Integer getSuccess() {
+    public String getSuccess() {
         return success;
     }
 
-    public void setSuccess(Integer success) {
+    public void setSuccess(String success) {
         this.success = success;
     }
 

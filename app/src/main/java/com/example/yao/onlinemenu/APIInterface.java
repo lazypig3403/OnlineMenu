@@ -3,7 +3,6 @@ package com.example.yao.onlinemenu;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -30,4 +29,16 @@ public interface APIInterface {
             @Field("cpn") String cpn,
             @Field("id") String id);
 
+    @FormUrlEncoded
+    @POST("vsupload.php")
+    Call<ServerResponse> vsupload(
+            @Field("un") String un,
+            @Field("id") String id,
+            @Field("vs") String vs,
+            @Field("status") String status);
+
+    @FormUrlEncoded
+    @POST("infoselect.php")
+    Call<ServerResponse> infoselect(
+            @Field("un") String un);
 }

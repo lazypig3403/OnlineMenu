@@ -45,7 +45,7 @@ public class SearchResult_Detail extends AppCompatActivity {
         tv_type.setText(type_show);
         tv_ingredient.setText(ingredient_show);
         img.setImageResource(img_show);
-        Toast.makeText(SearchResult_Detail.this, dish_no, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(SearchResult_Detail.this, dish_no, Toast.LENGTH_SHORT).show();
         Button bt;
         bt = (Button)findViewById(R.id.bt_search_detail_goOrder);
         bt.setOnClickListener(new mListener());
@@ -60,10 +60,10 @@ public class SearchResult_Detail extends AppCompatActivity {
 
             switch (v.getId()) {
                 case R.id.bt_search_detail_goOrder:
-                Intent intent = new Intent();
-                intent.setClass(SearchResult_Detail.this, CustomerCart.class);
-                startActivity(intent);
-                SearchResult_Detail.this.finish();
+                    Intent intent = new Intent();
+                    intent.setClass(SearchResult_Detail.this, CustomerCart.class);
+                    startActivity(intent);
+                    SearchResult_Detail.this.finish();
                     break;
 
                 case R.id.bt_search_detail_goMenu:

@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".GlobalVariable"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Online Menu"
@@ -68,8 +69,7 @@
         <activity android:name=".SearchResult_Detail" />
         <activity
             android:name=".StoreAdd"
-            android:label="新增店面" >
-        </activity>
+            android:label="新增店面" />
         <activity android:name=".StoreComment_detail" />
         <activity android:name=".StoreCommentUpdate" />
         <activity android:name=".StoreInfoUpdate" />
@@ -86,7 +86,13 @@
         <activity android:name=".DishAdd" />
         <activity android:name=".DishDetail" />
         <activity android:name=".StoreOrderManagement" />
-        <activity android:name=".StoreOrderDetail"></activity>
+        <activity android:name=".StoreOrderDetail" />
+        <activity android:name=".MenuAdd" />
+        <activity
+            android:name=".CustomerHome"
+            android:label="@string/title_activity_customer_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PhoneVerify"></activity>
     </application>
 
 </manifest>

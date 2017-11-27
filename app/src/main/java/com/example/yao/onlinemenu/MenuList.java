@@ -24,16 +24,16 @@ import retrofit2.Response;
 public class MenuList extends AppCompatActivity
 {
 
-    private TextView menuName;
+    private TextView tv_name;
     private RecyclerView mlist;
     String[] arrName, arrPrice, arrIngredient, arrType, arrStar;
     int[] arrImg;
     private ArrayList<HashMap<String, String>> dishData = new ArrayList<>();
 
     private ApiInterface_dish ApiI_dish;
-    private String menuNo;
+    private String menuName,menuNo;
     private String status = "selectdish";
-
+//    private String menuName_receive,menuNo_receive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,26 +44,20 @@ public class MenuList extends AppCompatActivity
 
         arrImg = new int[]{ R.mipmap.d001, R.mipmap.d004 };
 
-        menuName = (TextView) findViewById(R.id.typeName);
+        tv_name = (TextView) findViewById(R.id.typeName);
         mlist = (RecyclerView) findViewById(R.id.listView);
-
-        FloatingActionButton commBtn = (FloatingActionButton) findViewById(R.id.fab_add_menu_2);
-        commBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View vvv) {
-                Intent intent = new Intent();
-                intent.setClass(MenuList.this , DishAdd.class);
-                startActivity(intent);
-            }
-        });
-
 
         // 接收, (之後)並用此資料select資料庫
         Bundle extras = getIntent().getExtras();
         String menuName_receive = extras.getString("Menu_Name");
         String menuNo_receive = extras.getString("Menu_No");
-        menuName.setText(menuName_receive);
+
+        menuName=menuName_receive;
         menuNo = menuNo_receive;
+
+        tv_name.setText(menuName);
+
+
 
         ApiI_dish = ApiClient.getClient().create(ApiInterface_dish.class);
         Call<ServerResponse_dish> call_dish = ApiI_dish.selectDish(status,menuNo);
@@ -93,7 +87,7 @@ public class MenuList extends AppCompatActivity
                     //依序將資料存入hm_dish
                     hm_dish.put("Name_Show", arrName[i]);
                     hm_dish.put("Price_Show", arrPrice[i]);
-                    hm_dish.put( "Img_show", String.valueOf(arrImg[i]) );
+                    hm_dish.put( "Img_show", String.valueOf(arrImg[0]) );
                     //將hm存入dishData
                     dishData.add(hm_dish);
                 }
@@ -112,6 +106,22 @@ public class MenuList extends AppCompatActivity
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mlist.setLayoutManager(layoutManager);
+
+        FloatingActionButton daBtn = (FloatingActionButton) findViewById(R.id.fab_add_menu_2);
+        daBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vvv) {
+                Intent intent = new Intent();
+                intent.setClass(MenuList.this , DishAdd.class);
+
+                Bundle to_DishAdd = new Bundle();
+                to_DishAdd.putString("Menu_Name_da",menuName.toString());
+                to_DishAdd.putString("Menu_No_da",menuNo);
+                intent.putExtras(to_DishAdd);
+
+                startActivity(intent);
+            }
+        });
     }
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
@@ -155,7 +165,7 @@ public class MenuList extends AppCompatActivity
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.mName.setText(arrName[position]);
             holder.mPrice.setText(arrPrice[position]);
-            holder.mImg.setImageResource(arrImg[position]);
+            holder.mImg.setImageResource(arrImg[0]);
 
             // *** 不會使用,要去查 ***
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +181,7 @@ public class MenuList extends AppCompatActivity
                     bd_send.putString("Price", arrPrice[position]);
                     bd_send.putString("Type",arrType[position]);
                     bd_send.putString("Ingredient", arrIngredient[position]);
-                    bd_send.putInt("Img",arrImg[position]);
+                    bd_send.putInt("Img",arrImg[0]);
                     intent.putExtras(bd_send);
 
 //                    int cnt=2;
@@ -199,8 +209,6 @@ public class MenuList extends AppCompatActivity
         }
     }
 
-
-
     //返回鍵操作
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -216,7 +224,4 @@ public class MenuList extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
-
 }

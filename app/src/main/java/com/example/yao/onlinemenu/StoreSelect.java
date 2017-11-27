@@ -24,13 +24,13 @@ public class StoreSelect extends AppCompatActivity {
 
     private Button add;
     private RecyclerView storeList;
-    String[] arrName;
+    String[] arrName,arrStoreID;
     private ArrayList<HashMap<String, String>> storeData = new ArrayList<>();
 
     private ApiInterface_Store_Info ApiI_store_select;
 
     private String status = "selectstore";
-    private String ownerID="0";
+    private String oID="";  //(PHP還沒改)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,23 +38,30 @@ public class StoreSelect extends AppCompatActivity {
         setContentView(R.layout.activity_store_select);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //取得userID
+        GlobalVariable user = (GlobalVariable)getApplicationContext();
+        oID = user.getOwnerID();
+
         add = (Button) findViewById(R.id.add_store);
         add.setOnClickListener(new mListener());
 
         storeList = (RecyclerView) findViewById(R.id.store_listView);
 
         ApiI_store_select = ApiClient.getClient().create(ApiInterface_Store_Info.class);
-        Call<ServerResponse_storeinfo> call_ss = ApiI_store_select.store_select(status,ownerID);
+        Call<ServerResponse_storeinfo> call_ss = ApiI_store_select.store_select(status,oID);
         call_ss.enqueue(new Callback<ServerResponse_storeinfo>(){
             @Override
             public void onResponse(Call<ServerResponse_storeinfo> callSRs, Response<ServerResponse_storeinfo> resSRs)
             {
+                //new的方式好過宣告final變數
                 arrName = new String[resSRs.body().getResult().size()];
+                arrStoreID = new String[resSRs.body().getResult().size()];
 
                 //取出資料
                 for (int i = 0; i < resSRs.body().getResult().size(); i++) {
                     Result_storeinfo Rd = resSRs.body().getResult().get(i);
                     arrName[i] = Rd.getShopName();
+                    arrStoreID[i] = Rd.getSINO();
                 }
 
                 for (int i = 0; i < arrName.length; i++) {
@@ -75,8 +82,6 @@ public class StoreSelect extends AppCompatActivity {
                 callSRs.cancel();
             }
         });
-
-//        arrName = new String[]{ "花蓮鄉", "麥味登" };
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -131,16 +136,15 @@ public class StoreSelect extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //儲存storeID
+                    GlobalVariable user = (GlobalVariable) getApplicationContext();
+                    user.setStoreID(arrStoreID[position]);
+
                     //前往Store
                     Intent intent = new Intent();
                     intent.setClass(StoreSelect.this, StoreTab.class);
-
-//                    Bundle bd_send = new Bundle();
-//                    bd_send.putString("Name", arrName[position]);
-//                    intent.putExtras(bd_send);
-
                     holder.itemView.getContext().startActivity(intent);
-                    StoreSelect.this.finish();
+//                    StoreSelect.this.finish();
                 }
             } );
 
@@ -165,10 +169,7 @@ public class StoreSelect extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent();
-                intent.setClass(StoreSelect.this, Store_Home.class);
-                startActivity(intent);
-                StoreSelect.this.finish();
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

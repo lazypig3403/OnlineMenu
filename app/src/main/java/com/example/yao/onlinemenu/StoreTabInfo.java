@@ -9,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
-
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +22,7 @@ public class StoreTabInfo extends  Fragment
     private TextView storeName,openTime,address,phone,parking,booking,delivery,type;
     private ImageView img;
 
-    private String storeID = "40";
+    private String storeID = "";
     private String status = "storeinfoselect";
     int time=2 ;
     Button hide;
@@ -38,6 +36,10 @@ public class StoreTabInfo extends  Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup pager, Bundle savedInstanceState)
     {
        final View rootView = inflater.inflate(R.layout.activity_store_tab_info, pager, false);
+
+        //取得userID
+        GlobalVariable user = (GlobalVariable) getActivity().getApplicationContext();
+        storeID = user.getStoreID();
 
         img = (ImageView) rootView.findViewById(R.id.imageView_photo) ;
         img.setImageResource(R.mipmap.gm);
@@ -110,7 +112,7 @@ public class StoreTabInfo extends  Fragment
                                            Intent newAct = new Intent();
                                            newAct.setClass(getActivity(), StoreInfoUpdate.class);
                                            startActivity(newAct);
-//                                           getActivity().finish();
+//                                          getActivity().finish();
                                        }
                                    });
 

@@ -21,4 +21,15 @@
     <string name="choose2">相簿</string>
     <string name="title_activity_store_dish_detail">StoreDishDetail</string>
     <string name="title_activity_home_page_store">HomePageStore</string>
+
+    <!--訂單回覆-下拉式選單 -->
+    <!--<string name="spn_prompt_orderReply">選擇範例回覆</string>-->
+    <string-array name="reasons_orderReply">
+        <item>--選擇預設範例--</item>
+        <item>餐點已賣完,請見諒</item>
+        <item>營業時間已結束,請見諒</item>
+        <item>本日臨時公休,請見諒</item>
+    </string-array>
+    <string name="title_activity_drawer_main">DrawerMain</string>
+    <string name="title_activity_customer_home">CustomerHome</string>
 </resources>
